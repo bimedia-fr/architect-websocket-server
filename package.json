@@ -1,0 +1,32 @@
+{
+  "name": "architect-websocket-server",
+  "version": "1.0.0",
+  "description": "architect websocket server with websocket multiplex suport and routing",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodeunit test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bimedia-fr/architect-websocket-server.git"
+  },
+  "keywords": [
+    "architect",
+    "websocket",
+    "sockjs",
+    "multiplex"
+  ],
+  "author": "jerome creignou",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bimedia-fr/architect-websocket-server/issues"
+  },
+  "homepage": "https://github.com/bimedia-fr/architect-websocket-server#readme",
+  "devDependencies": {
+    "nodeunit": "^0.9.1"
+  },
+  "dependencies": {
+    "sockjs": "^0.3.15",
+    "websocket-multiplex": "^0.1.0"
+  }
+}
