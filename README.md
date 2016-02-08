@@ -18,6 +18,7 @@ npm install architect-websocket-server
   prefix: '/api',
   channels: ['printer', 'chatroom']
 }
+```
 
 ### Usage
 
