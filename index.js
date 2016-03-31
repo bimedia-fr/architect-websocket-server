@@ -46,7 +46,6 @@ module.exports = function setup(options, imports, register) {
                 server : api,
                 channels: channels,
                 routers : (options.channels || []).reduce(function (prev, curr) {
-                    log.debug('creating router for', curr);
                     prev[curr] = new Router(channels[curr], log);
                     return prev;
                 }, {})
