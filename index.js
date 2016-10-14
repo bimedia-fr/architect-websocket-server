@@ -29,32 +29,37 @@ module.exports = function setup(options, imports, register) {
     if (options.channels) { // multiplexing is enabled
         multiplexer = new multiplex_server.MultiplexServer(api);
     }
+
+    // Load channels on multiplexer
+    var channels = (options.channels || []).reduce(function (prev, curr) {
+        log.debug('creating channel for', curr);
+        prev[curr] = multiplexer.registerChannel(curr);
+        return prev;
+    }, {});
+
+    register(null, {
+        wsserver: {
+            server : api,
+            channels: channels,
+            routers : (options.channels || []).reduce(function (prev, curr) {
+                prev[curr] = new Router(channels[curr], log);
+                return prev;
+            }, {})
+        },
+        onDestroy: function (callback) {
+            log.info('closing serveur');
+            server.close(callback);
+        }
+    });
+
     // Start listening port
     server.listen(port, host, function (err) {
 
         if (err) {
             return register(err);
         }
+
         log.info('listening on %s:%s', host, port);
-        var channels = (options.channels || []).reduce(function (prev, curr) {
-            log.debug('creating channel for', curr);
-            prev[curr] = multiplexer.registerChannel(curr);
-            return prev;
-        }, {});
-        register(null, {
-            wsserver: {
-                server : api,
-                channels: channels,
-                routers : (options.channels || []).reduce(function (prev, curr) {
-                    prev[curr] = new Router(channels[curr], log);
-                    return prev;
-                }, {})
-            },
-            onDestroy: function (callback) {
-                log.info('closing serveur');
-                server.close(callback);
-            }
-        });
     });
 };
 
