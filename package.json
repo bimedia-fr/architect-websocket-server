@@ -1,6 +1,6 @@
 {
   "name": "architect-websocket-server",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "architect websocket server with websocket multiplex suport and routing",
   "main": "index.js",
   "scripts": {
